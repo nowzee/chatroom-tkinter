@@ -17,39 +17,43 @@ def mainlogin():
         root.title("tcp-chatroom")
 
         def connec():
-            for widget in root.winfo_children():
-                widget.destroy()
-            client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            client.connect(('127.0.0.1', 6666))
-            client.send('r'.encode('utf-8'))
+            global list1
+            try:
+                client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                client.connect(('127.0.0.1', 6666))
+                client.send('r'.encode('utf-8'))
+                for widget in root.winfo_children():
+                    widget.destroy()
 
-            def receive():
-                while True:
-                    try:
-                        mss = client.recv(1024).decode('utf-8')
-                        list1.insert(END, mss + "\n")
-                    except WindowsError as f:
-                        print(f)
-                        break
+                def receive():
+                    while True:
+                        try:
+                            mss = client.recv(1024).decode('utf-8')
+                            list1.insert(END, mss + "\n")
+                        except WindowsError as f:
+                            print(f)
+                            break
 
-            def send():
-                mss = f'{username}: {entrysend.get()}'
-                client.send(mss.encode())
+                def send():
+                    mss = f'{username}: {entrysend.get()}'
+                    client.send(mss.encode())
 
-            def press(event):
-                send()
+                def press(event):
+                    send()
 
+                list1 = customtkinter.CTkTextbox(master=root, width=400, height=315)
+                list1.place(x=0, y=0)
+                entrysend = customtkinter.CTkEntry(master=root, placeholder_text="Envoyer un message dans tcp-chatroom",
+                                                   width=400)
+                entrysend.place(x=0, y=320)
+                buttonsend = customtkinter.CTkButton(master=root, text="Send", command=send)
+                buttonsend.place(x=400, y=320)
+                root.bind_all('<Return>', press)
 
-            list1 = customtkinter.CTkTextbox(master=root, width=400, height=315)
-            list1.place(x=0, y=0)
-            entrysend = customtkinter.CTkEntry(master=root, placeholder_text="Envoyer un message dans tcp-chatroom", width=400)
-            entrysend.place(x=0, y=320)
-            buttonsend = customtkinter.CTkButton(master=root, text="Send", command=send)
-            buttonsend.place(x=400, y=320)
-            root.bind_all('<Return>', press)
-
-            receive_thread = threading.Thread(target=receive)
-            receive_thread.start()
+                receive_thread = threading.Thread(target=receive)
+                receive_thread.start()
+            except Exception:
+                messagebox.showinfo('serveur', 'serveur deconnecté')
 
         button14 = customtkinter.CTkButton(master=root, text="connect to chatroom", command=connec)
         button14.pack(expand=TRUE)
@@ -110,7 +114,7 @@ def mainlogin():
     frame = customtkinter.CTkFrame(master=root)
     frame.pack(pady=20, padx=60, fill='both', expand=True)
 
-    label1 = customtkinter.CTkLabel(master=frame, text='Mirrage login', font=("Roboto", 24))
+    label1 = customtkinter.CTkLabel(master=frame, text='chatroom login', font=("Roboto", 24))
     label1.pack(pady=12, padx=10)
 
     entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Username")
