@@ -1,4 +1,7 @@
 # tcp-chatroom-tkinter
+Lancer le serveur puis ensuite le client
+admin password : 1234
+louis password : 12345
 
 # Login System
 ![Python 3 10 07_12_2022 06_28_02](https://user-images.githubusercontent.com/95884098/206096874-b0ec96a4-7ddc-43d7-a68c-5f93af8c0eb4.png)
