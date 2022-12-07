@@ -1,6 +1,6 @@
 # tcp-chatroom-tkinter
-Lancer le serveur puis ensuite le client
-**admin password : 1234**
+Lancer le serveur puis ensuite le client ,
+**admin password : 1234**, 
 **louis password : 12345**
 
 # Login System
