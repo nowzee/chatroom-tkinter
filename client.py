@@ -94,7 +94,7 @@ def mainlogin():
         if username == '':
             entry1.delete(0, END)
             entry1.insert(0, "Failed")
-        elif username == 'e':
+        elif username == 'admin':
             entry1.delete(0, END)
             entry1.insert(0, "Failed")
 
