@@ -9,6 +9,7 @@ server.bind((host, port))
 server.listen(5)
 
 clients = []
+username = []
 
 def boradcoast(namess):
     for client in clients:
@@ -24,18 +25,20 @@ def send(client):
             i = clients.index(client)
             clients.remove(client)
             client.close()
-            boradcoast(f'Une personne a quitté le groupe'.encode('utf-8'))
+            name = username[i]
+            boradcoast(f'{name} a quitté le groupe'.encode('utf-8'))
+            username.remove(name)
             break
 
 def receiveclient():
     while True:
         client, address = server.accept()
         print(f'client connecté avec {str(address)}')
-        names = client.recv(1024).decode('utf-8')
-        boradcoast(f'une personne à rejoin le groupe'.encode('utf-8'))
+        usernames = client.recv(1024).decode('utf-8')
+        username.append(usernames)
         clients.append(client)
+        boradcoast(f'{usernames} à rejoin le groupe'.encode('utf-8'))
         #log
-        print(names)
+        print(usernames)
         threading.Thread(target=send, args=(client,)).start()
-
 receiveclient()
