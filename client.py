@@ -4,7 +4,6 @@ import threading
 import sqlite3
 import hashlib
 import customtkinter
-import rsa
 from tkinter import *
 from tkinter import messagebox
 
