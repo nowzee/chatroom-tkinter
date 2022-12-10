@@ -1,7 +1,6 @@
 #import library
 import socket
 import threading
-import rsa #bientot
 
 host, port = '127.0.0.1',6666
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
