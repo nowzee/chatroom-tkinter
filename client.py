@@ -16,11 +16,10 @@ def mainlogin():
         root.title("tcp-chatroom")
 
         def connec():
-            global list1
             try:
                 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 client.connect(('127.0.0.1', 6666))
-                client.send('r'.encode('utf-8'))
+                client.send(username.encode('utf-8'))
                 for widget in root.winfo_children():
                     widget.destroy()
 
